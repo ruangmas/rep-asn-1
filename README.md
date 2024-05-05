@@ -1,5 +1,5 @@
 # Paper Replication Assignment 1: Understanding the Data
-FIRE198 Sustainability Analytics
+FIRE Sustainability Analytics
 
 ## Part 1. Understanding the Data
 

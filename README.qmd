@@ -1,6 +1,6 @@
 ---
 title: "Paper Replication Assignment 1: Understanding the Data"
-author: "FIRE198 Sustainability Analytics"
+author: "FIRE Sustainability Analytics"
 format: gfm
 editor: visual
 ---
