@@ -1,7 +1,7 @@
 ---
-title: "ASN5.1. Paper Replication: Understanding the Data"
-author: "2024 FIRE198 Sustainability Analytics"
-format: html
+title: "Paper Replication Assignment 1: Understanding the Data"
+author: "FIRE198 Sustainability Analytics"
+format: gfm
 editor: visual
 ---
 
@@ -12,6 +12,7 @@ editor: visual
 Let RStudio know that you plan to use the tidyverse package with the script below. You just need to run it.
 
 ```{r}
+#| message: false
 library("tidyverse")
 ```
 
@@ -35,11 +36,11 @@ names(df2007)
 
 #### Question 1: What three variables indicate the total amount of greenhouse gases and pollutants that were being emitted? (3 points)
 
-#### Answer: 
+#### Answer:
 
 #### Question 2: What variables are used to identify each electricity-generating unit? (2 points)
 
-#### Answer: 
+#### Answer:
 
 #### Question 3: What two variables identify the time the gases were emitted? (2 points)
 
@@ -55,7 +56,7 @@ table(df2007$State)
 
 #### Question 4: Which state has the highest number of electricity-generating units? (1 point)
 
-#### Answer: 
+#### Answer:
 
 ### Step 5
 
@@ -67,7 +68,7 @@ summary(df2007)
 
 #### Question 5: What is the average gross load? (1 point)
 
-#### Answer: 
+#### Answer:
 
 #### Question 6: How many missing values (or NAs) are in the column NOx..tons.? (1 point)
 
@@ -90,7 +91,7 @@ df0<-df2007 %>%
 
 ```
 
-#### Answer: 
+#### Answer:
 
 ### Step 8
 
@@ -128,6 +129,7 @@ In Part 1, Step 2, you have uploaded emissions data from 2007. You need to do th
 Use the **rbind** function to stack all emissions data in 2001, 2002, 2005, 2006, and 2007 together into one data frame, **df**. The code is shown below. You just have to run it.
 
 ```{r}
+#| eval: false
 df<-rbind(df2001, df2002, df2005, df2006, df2007)
 ```
 
@@ -154,6 +156,7 @@ Repeat what you did in Part 1, Step 8 to create a new dataframe named **df2** wi
 We will limit our observations to facilities regulated by the Acid Rain Program before the NOx Budget Program. We will use the **filter** function to keep observations that the variable **Program.s.** equals **ARP** or **ARP, NBP**. The code is shown below. You just need to run it.
 
 ```{r}
+#| eval: false
 df3<-df2 %>%
   filter(Program.s.=="ARP" | Program.s.=="ARP, NBP")
 ```
@@ -174,7 +177,7 @@ You will need to combine the **mutate** and **ifelse** functions to create a dat
 
 ```
 
-#### Answer: 
+#### Answer:
 
 ### Step 6: Click Render to generate an html file of this document. (2 points)
 

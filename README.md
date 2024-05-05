@@ -1,2 +1,2 @@
-# spring-asn-5-1
-ASN5.1. Paper Replication: Understanding the Data
+# rep-asn-1
+Paper Replication Assignment 1: Understanding the Data
