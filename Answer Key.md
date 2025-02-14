@@ -48,15 +48,15 @@ names(df2007)
 
 #### Question 1: What three variables indicate the total amount of greenhouse gases and pollutants that were being emitted? (3 points)
 
-#### Answer:
+#### Answer: SO2..tons. , NOx..tons. , CO2..short.tons.
 
 #### Question 2: What variables are used to identify each electricity-generating unit? (2 points)
 
-#### Answer:
+#### Answer: Facility.ID..ORISPL., Unit.ID
 
 #### Question 3: What two variables identify the time the gases were emitted? (2 points)
 
-#### Answer:
+#### Answer: Month, Year
 
 ### Step 4
 
@@ -80,7 +80,7 @@ table(df2007$State)
 
 #### Question 4: Which state has the highest number of electricity-generating units? (1 point)
 
-#### Answer:
+#### Answer: TX
 
 ### Step 5
 
@@ -142,11 +142,11 @@ summary(df2007)
 
 #### Question 5: What is the average gross load? (1 point)
 
-#### Answer:
+#### Answer: 78,076 MwH
 
 #### Question 6: How many missing values (or NAs) are in the column NOx..tons.? (1 point)
 
-#### Answer:
+#### Answer: 8,854
 
 ### Step 6
 
@@ -164,7 +164,52 @@ df0<-df2007 %>%
 
 #### Hint: Use the summary function.
 
-#### Answer:
+``` r
+summary(df0)
+```
+
+           X            State           Facility.Name      Facility.ID..ORISPL.
+     Min.   :    2   Length:8854        Length:8854        Min.   :     3      
+     1st Qu.:12635   Class :character   Class :character   1st Qu.:  1912      
+     Median :23100   Mode  :character   Mode  :character   Median :  4195      
+     Mean   :23469                                         Mean   : 35083      
+     3rd Qu.:34185                                         3rd Qu.: 55128      
+     Max.   :49490                                         Max.   :880094      
+                                                                               
+       Unit.ID          Associated.Stacks      Month             Year     
+     Length:8854        Length:8854        Min.   : 1.000   Min.   :2007  
+     Class :character   Class :character   1st Qu.: 3.000   1st Qu.:2007  
+     Mode  :character   Mode  :character   Median : 5.000   Median :2007  
+                                           Mean   : 6.089   Mean   :2007  
+                                           3rd Qu.: 9.000   3rd Qu.:2007  
+                                           Max.   :12.000   Max.   :2007  
+                                                                          
+      Program.s.        Operating.Time     Gross.Load..MW.h. Steam.Load..1000lb.
+     Length:8854        Min.   : 0.00000   Min.   :   0.0    Min.   : 1         
+     Class :character   1st Qu.: 0.00000   1st Qu.:   0.0    1st Qu.:15         
+     Mode  :character   Median : 0.00000   Median :   0.0    Median :29         
+                        Mean   : 0.01807   Mean   : 306.3    Mean   :29         
+                        3rd Qu.: 0.00000   3rd Qu.:   0.0    3rd Qu.:43         
+                        Max.   :55.50000   Max.   :3674.0    Max.   :57         
+                                           NA's   :8834      NA's   :8852       
+       SO2..tons.    Avg..NOx.Rate..lb.MMBtu.   NOx..tons.   CO2..short.tons.  
+     Min.   :0.000   Min.   :0.000            Min.   : NA    Min.   :   0.000  
+     1st Qu.:0.000   1st Qu.:0.000            1st Qu.: NA    1st Qu.:   0.007  
+     Median :0.000   Median :0.000            Median : NA    Median :   0.200  
+     Mean   :0.176   Mean   :0.180            Mean   :NaN    Mean   : 318.832  
+     3rd Qu.:0.000   3rd Qu.:0.013            3rd Qu.: NA    3rd Qu.:   7.022  
+     Max.   :2.164   Max.   :2.379            Max.   : NA    Max.   :2805.603  
+     NA's   :8837    NA's   :8834             NA's   :8854   NA's   :8839      
+     Heat.Input..MMBtu.   EPA.Region     NERC.Region           County         
+     Min.   :    0.00   Min.   : 1.000   Length:8854        Length:8854       
+     1st Qu.:    0.00   1st Qu.: 4.000   Class :character   Class :character  
+     Median :    0.82   Median : 5.000   Mode  :character   Mode  :character  
+     Mean   : 3309.04   Mean   : 4.731                                        
+     3rd Qu.:   37.46   3rd Qu.: 6.000                                        
+     Max.   :46584.93   Max.   :10.000                                        
+     NA's   :8830                                                             
+
+#### Answer: 306 MwH
 
 ### Step 8
 
@@ -202,6 +247,13 @@ the implementation of the NOx Budget Program.
 In Part 1, Step 2, you have uploaded emissions data from 2007. You need
 to do the same thing for 2001, 2002, 2005, and 2006.
 
+``` r
+df2001<-read.csv("EPA AMPD/emission_2001.csv")
+df2002<-read.csv("EPA AMPD/emission_2002.csv")
+df2005<-read.csv("EPA AMPD/emission_2005.csv")
+df2006<-read.csv("EPA AMPD/emission_2006.csv")
+```
+
 ### Step 2: Combine data
 
 Use the **rbind** function to stack all emissions data in 2001, 2002,
@@ -220,9 +272,34 @@ Repeat what you did in Part 1, Step 8 to create a new dataframe named
 **NOx_emit** will to 0 if **NOx..tons.** is equal to NA. Otherwise,
 **NOx_emit** will equal to **NOx..tons.**
 
+``` r
+df2<-df %>% 
+  mutate(NOx_emit = ifelse(is.na(NOx..tons.),0,NOx..tons.))
+```
+
 #### Question 8: What are the six possible values for the Program.s. variable? (1 point for the correct code and 1 point for the correct answer)
 
+``` r
+table(df2$Program.s.)
+```
+
+
+           ARP   ARP, NBP ARP, NHNOX   ARP, OTC        NBP        OTC 
+        122193      57849        360       8841      23379      11208 
+
 #### Answer:
+
+#### ARP
+
+#### ARP, NBP
+
+#### ARP, NHNOX
+
+#### ARP, OTC
+
+#### NBP
+
+#### OTC
 
 ### Step 4: Keep only units regulated by the Acid Rain Program (ARP).
 
@@ -245,9 +322,22 @@ create a dataframe named **df4** with a new column called **NBP**.
 **NBP** will equal to 1 if the column **Program.s.** is equal to **ARP,
 NBP**. Otherwise, **NBP** will equal to 0.
 
+``` r
+df4<-df3 %>%
+  mutate(NBP=ifelse(Program.s.=="ARP, NBP",1,0))
+```
+
 #### Question 9: How many observations in **df4** were regulated by NBP, and how many were not-regulated by NBP? (1 point for the correct code and 1 point for the correct answer)
 
-#### Answer:
+``` r
+table(df4$NBP)
+```
+
+
+         0      1 
+    122193  57849 
+
+#### Answer: 122193 unregulated units, and 57849 regulated units
 
 ### Step 6: Remove all lines of script with \#\|eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
 

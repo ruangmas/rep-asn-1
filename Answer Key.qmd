@@ -36,15 +36,15 @@ names(df2007)
 
 #### Question 1: What three variables indicate the total amount of greenhouse gases and pollutants that were being emitted? (3 points)
 
-#### Answer:
+#### Answer: SO2..tons. , NOx..tons. , CO2..short.tons.
 
 #### Question 2: What variables are used to identify each electricity-generating unit? (2 points)
 
-#### Answer:
+#### Answer: Facility.ID..ORISPL., Unit.ID
 
 #### Question 3: What two variables identify the time the gases were emitted? (2 points)
 
-#### Answer:
+#### Answer: Month, Year
 
 ### Step 4
 
@@ -56,7 +56,7 @@ table(df2007$State)
 
 #### Question 4: Which state has the highest number of electricity-generating units? (1 point)
 
-#### Answer:
+#### Answer: TX
 
 ### Step 5
 
@@ -68,11 +68,11 @@ summary(df2007)
 
 #### Question 5: What is the average gross load? (1 point)
 
-#### Answer:
+#### Answer: 78,076 MwH
 
 #### Question 6: How many missing values (or NAs) are in the column NOx..tons.? (1 point)
 
-#### Answer:
+#### Answer: 8,854
 
 ### Step 6
 
@@ -88,10 +88,10 @@ df0<-df2007 %>%
 #### Hint: Use the summary function.
 
 ```{r}
-
+summary(df0)
 ```
 
-#### Answer:
+#### Answer: 306 MwH
 
 ### Step 8
 
@@ -121,7 +121,10 @@ You will use the **filter** and **mutate** functions to identify which facilitie
 In Part 1, Step 2, you have uploaded emissions data from 2007. You need to do the same thing for 2001, 2002, 2005, and 2006.
 
 ```{r}
-
+df2001<-read.csv("EPA AMPD/emission_2001.csv")
+df2002<-read.csv("EPA AMPD/emission_2002.csv")
+df2005<-read.csv("EPA AMPD/emission_2005.csv")
+df2006<-read.csv("EPA AMPD/emission_2006.csv")
 ```
 
 ### Step 2: Combine data
@@ -129,7 +132,6 @@ In Part 1, Step 2, you have uploaded emissions data from 2007. You need to do th
 Use the **rbind** function to stack all emissions data in 2001, 2002, 2005, 2006, and 2007 together into one data frame, **df**. The code is shown below. You just have to run it.
 
 ```{r}
-#| eval: false
 df<-rbind(df2001, df2002, df2005, df2006, df2007)
 ```
 
@@ -140,23 +142,35 @@ Repeat what you did in Part 1, Step 8 to create a new dataframe named **df2** wi
 **NOx_emit** will to 0 if **NOx..tons.** is equal to NA. Otherwise, **NOx_emit** will equal to **NOx..tons.**
 
 ```{r}
-
+df2<-df %>% 
+  mutate(NOx_emit = ifelse(is.na(NOx..tons.),0,NOx..tons.))
 ```
 
 #### Question 8: What are the six possible values for the Program.s. variable? (1 point for the correct code and 1 point for the correct answer)
 
 ```{r}
-
+table(df2$Program.s.)
 ```
 
-#### Answer:
+#### Answer: 
+
+#### ARP
+
+#### ARP, NBP
+
+#### ARP, NHNOX
+
+#### ARP, OTC
+
+#### NBP
+
+#### OTC
 
 ### Step 4: Keep only units regulated by the Acid Rain Program (ARP).
 
 We will limit our observations to facilities regulated by the Acid Rain Program before the NOx Budget Program. We will use the **filter** function to keep observations that the variable **Program.s.** equals **ARP** or **ARP, NBP**. The code is shown below. You just need to run it.
 
 ```{r}
-#| eval: false
 df3<-df2 %>%
   filter(Program.s.=="ARP" | Program.s.=="ARP, NBP")
 ```
@@ -168,17 +182,18 @@ You will need to combine the **mutate** and **ifelse** functions to create a dat
 **NBP** will equal to 1 if the column **Program.s.** is equal to **ARP, NBP**. Otherwise, **NBP** will equal to 0.
 
 ```{r}
-
+df4<-df3 %>%
+  mutate(NBP=ifelse(Program.s.=="ARP, NBP",1,0))
 ```
 
 #### Question 9: How many observations in **df4** were regulated by NBP, and how many were not-regulated by NBP? (1 point for the correct code and 1 point for the correct answer)
 
 ```{r}
-
+table(df4$NBP)
 ```
 
-#### Answer:
+#### Answer:  122193 unregulated units, and 57849 regulated units
 
-### Step 6: Remove all lines of script with #\|eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
+### Step 6: Remove all lines of script with #|eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
 
 You have reached the end of the assignment. Save the Quarto document and push the completed assignment back into the GitHub repository.
