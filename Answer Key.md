@@ -339,7 +339,7 @@ table(df4$NBP)
 
 #### Answer: 122193 unregulated units, and 57849 regulated units
 
-### Step 6: Remove all lines of script with \#\|eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
+### Step 6: Remove all lines of script with \#\| eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
 
 You have reached the end of the assignment. Save the Quarto document and
 push the completed assignment back into the GitHub repository.
