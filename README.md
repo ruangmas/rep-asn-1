@@ -2,16 +2,14 @@
 
 ## Part 1. Understanding the Data
 
-### Step 1
-
-Let RStudio know that you plan to use the tidyverse package with the
-script below. You just need to run it.
+Step 1: Let RStudio know that you plan to use the tidyverse package with
+the script below. You just need to run it.
 
 ``` r
 library("tidyverse")
 ```
 
-### Step 2
+Step 2: Upload dataframe into the Environment.
 
 Notice that the folder **EPA AMPD** appeared after you have cloned the
 repository. Within the folder are 5 files that shows monthly emissions
@@ -26,10 +24,8 @@ run it.
 df2007<-read.csv("EPA AMPD/emission_2007.csv")
 ```
 
-### Step 3
-
-Use the **names** function to preview the variable names. This can be
-done by using the script below.
+Step 3: Use the **names** function to preview the variable names. This
+can be done by using the script below.
 
 ``` r
 names(df2007)
@@ -58,11 +54,9 @@ names(df2007)
 
 #### Answer:
 
-### Step 4
-
-Use the **table** function to preview the values in each column. The
-script below shows how many values are there in the column **State.**
-You just have to run it.
+Step 4: Use the **table** function to preview the values in each column.
+The script below shows how many values are there in the column
+**State.** You just have to run it.
 
 ``` r
 table(df2007$State)
@@ -82,10 +76,8 @@ table(df2007$State)
 
 #### Answer:
 
-### Step 5
-
-Use the **summary** function to summarize the **df2007** dataframe. The
-code is shown below. You just have to run it.
+Step 5: Use the **summary** function to summarize the **df2007**
+dataframe. The code is shown below. You just have to run it.
 
 ``` r
 summary(df2007)
@@ -148,7 +140,7 @@ summary(df2007)
 
 #### Answer:
 
-### Step 6
+Step 6: Remove missing values.
 
 Let’s investigate the missing data in **NOx..tons.** The script below
 uses the **filter** function and creates a new dataframe called **df0**
@@ -166,7 +158,7 @@ df0<-df2007 %>%
 
 #### Answer:
 
-### Step 8
+Step 8: Replace missing values with 0.
 
 Because the average gross load for observations with NA values in
 **NOx..tons.** are much lower than the average, we will replace NA
@@ -197,12 +189,12 @@ the implementation of the NOx Budget Program.
 
 <img src="Figure%201%20Rep.png" data-fig-align="center" width="500" />
 
-### Step 1: Upload data (2 points)
+Step 1: Upload data **(2 points)**
 
 In Part 1, Step 2, you have uploaded emissions data from 2007. You need
 to do the same thing for 2001, 2002, 2005, and 2006.
 
-### Step 2: Combine data
+Step 2: Combine data.
 
 Use the **rbind** function to stack all emissions data in 2001, 2002,
 2005, 2006, and 2007 together into one data frame, **df**. The code is
@@ -212,7 +204,7 @@ shown below. You just have to run it.
 df<-rbind(df2001, df2002, df2005, df2006, df2007)
 ```
 
-### Step 3: Replace missing values with 0 (1 point)
+Step 3: Replace missing values with 0. **(1 point)**
 
 Repeat what you did in Part 1, Step 8 to create a new dataframe named
 **df2** with a new column named **NOx_emit**.
@@ -224,7 +216,7 @@ Repeat what you did in Part 1, Step 8 to create a new dataframe named
 
 #### Answer:
 
-### Step 4: Keep only units regulated by the Acid Rain Program (ARP).
+Step 4: Keep only units regulated by the Acid Rain Program (ARP).
 
 We will limit our observations to facilities regulated by the Acid Rain
 Program before the NOx Budget Program. We will use the **filter**
@@ -237,7 +229,8 @@ df3<-df2 %>%
   filter(Program.s.=="ARP" | Program.s.=="ARP, NBP")
 ```
 
-### Step 5: Create a new column named **NBP** that is equal to one when each unit is regulated by the NOx Budget Program (3 points).
+Step 5: Create a new column named **NBP** that is equal to one when each
+unit is regulated by the NOx Budget Program. **(3 points)**
 
 You will need to combine the **mutate** and **ifelse** functions to
 create a dataframe named **df4** with a new column called **NBP**.
@@ -249,7 +242,9 @@ NBP**. Otherwise, **NBP** will equal to 0.
 
 #### Answer:
 
-### Step 6: Remove all lines of script with \#\| eval: false which prevents the line from running when rendered. Afterward, click Render to generate an html file of this document. (2 points)
+Step 6: Remove all lines of script with \#\| eval: false which prevents
+the line from running when rendered. Afterward, click Render to generate
+an html file of this document. **(2 points)**
 
 You have reached the end of the assignment. Save the Quarto document and
 push the completed assignment back into the GitHub repository.
